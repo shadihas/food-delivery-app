@@ -23,7 +23,7 @@ class _HomePageState extends State<HomePage> {
   List pages =[
    MainFoodPage(),
    CartHistory(),
-  //  CartPage(),
+    CartPage(),
    Container(), 
   ];
   @override

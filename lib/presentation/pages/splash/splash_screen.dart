@@ -16,12 +16,14 @@ class SplashScreen extends StatefulWidget {
 } 
 class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMixin {
   Future<void> loadResourses()async{ 
-     Get.find<CartController>(); 
-     Get.find<PopularProductController>();
-      Get.find<RecommendedProductController>();
-    //  Get.find<CartController>().getCartData();
-    await Get.find<PopularProductController>().getPopularProductList();
+     await Get.find<PopularProductController>().getPopularProductList();
     await Get.find<RecommendedProductController>().getRecommendedProductList(); 
+    await  Get.find<CartController>();
+    await Get.find<CartController>().cartId; 
+      Get.find<CartController>().cartRepo;
+    //   Get.find<RecommendedProductController>(); 
+    // await Get.find<PopularProductController>().getPopularProductList();
+    // await Get.find<RecommendedProductController>().getRecommendedProductList(); 
   }
   late AnimationController animationController;
   late CurvedAnimation curvedAnimation; 
@@ -30,9 +32,8 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
    animationController = AnimationController(vsync: this,duration: Duration(seconds: 2))..forward();
    curvedAnimation = CurvedAnimation(parent: animationController, curve: Curves.linear);
    Timer(Duration(seconds: 4),()=> Get.toNamed(RouteHelper.getInitial())); 
-   
-    super.initState();
-   
+     
+     super.initState(); 
   } 
   @override
   Widget build(BuildContext context) { 

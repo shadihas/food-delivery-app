@@ -15,8 +15,10 @@ class CartController extends GetxController{
    Map get items =>_items ;
    int totalPrice = 0;
   
-  void addItem(product, int quantity){ 
-   
+  void addItem(ProductModel product, int quantity){ 
+  
+      // _items.removeWhere((key, value)=>value.quantity==0);
+    
   if(!_items.containsKey(product.id)){
     
   _items.putIfAbsent(product.id, () { 
@@ -27,30 +29,36 @@ class CartController extends GetxController{
     name:product.name ,
     price: product.price,
     quantity:quantity ,
+    product: product,
     time:DateTime.now().toString() , );
   }); }else{
-     if(quantity ==0){
-      _items.remove(product);
-    }
+    
   _items.update( product.id, (value) {
+    
  return CartModel( id: product.id 
     ,img: product.img,
     isExist:true ,
     name:product.name ,
     price: product.price, 
-    quantity:quantity  ,
+    quantity:quantity,
+    product: product,
 
     time:DateTime.now().toString() , );
 
   });
-  
+ 
   }
 
   // cartRepo.addToCart(cartItems);
-  
+   _items.removeWhere((k,v) => v.quantity==0);
+   getItems.forEach((element) {
+    print(element.quantity);
+   });
  
   update();
   }
+
+List<CartModel> get getItems => _items.entries.map((e) => e.value).toList();
 
 int getQuantity(ProductModel product){
   var quantity = 0;
@@ -60,7 +68,9 @@ int getQuantity(ProductModel product){
         quantity = value.quantity!;
       }
     });
+    update();
   }return quantity;
+  
 }
  
  int get totalItems{
@@ -73,16 +83,16 @@ int getQuantity(ProductModel product){
  
   // List<CartModel> get cartItems =>  _items.entries.map((e) => e.value).toList();
 
-  // List get cartId => _items.entries.map((e) => e.key).toList();
+   List get cartId => _items.entries.map((e) => e.key).toList();
  
-// int countTotalPrice(){
-// totalPrice =0;
-// cartItems.forEach((e) {
-//   totalPrice = (e.price! * e.quantity!) +totalPrice;
+int countTotalPrice(){
+totalPrice =0;
+getItems.forEach((e) {
+  totalPrice = (e.price! * e.quantity!) +totalPrice;
 
-// });
-//   return totalPrice;
-// }
+});
+  return totalPrice;
+}
  
  
  

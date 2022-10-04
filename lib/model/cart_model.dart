@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:food_delivery/model/food_data_model.dart';
+
 class CartModel {
   int? id;
   int? price;
@@ -8,6 +10,7 @@ class CartModel {
   int? quantity;
   bool? isExist;
   String? time; 
+  ProductModel? product;
   
   CartModel({
     this.id,
@@ -17,6 +20,7 @@ class CartModel {
     this.isExist,
     this.quantity,
     this.time,
+    this.product
   }); 
   factory CartModel.fromMap(Map<String, dynamic> map) {
   return  CartModel(
@@ -27,6 +31,7 @@ class CartModel {
       quantity: map['quantity']?.toInt(),
       isExist: map['isExist'],
       time: map['time'], 
+      product: ProductModel.fromJson(map)
     );
   } 
     Map<String , dynamic> toJson(){

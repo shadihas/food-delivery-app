@@ -22,7 +22,7 @@ GetPage(name:'/foodDetails', page: (){
  String? pageId = Get.parameters['pageId'];
  return FoodDetail(pageId:int.parse(pageId!));}, 
  ),
-//  GetPage(name: '/cartPage', page: ()=> CartPage()),
+  GetPage(name: '/cartPage', page: ()=> CartPage()),
  GetPage(name: '/splashScreen', page: ()=> SplashScreen()),
  
 

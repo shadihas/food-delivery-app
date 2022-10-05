@@ -5,11 +5,9 @@ import 'package:food_delivery/controllers/recommended_product_controller.dart';
 import 'package:food_delivery/core/dimension.dart';
 import 'package:food_delivery/core/routes/route_helper.dart';
 import 'package:food_delivery/core/utils/app_constants.dart';
-import 'package:food_delivery/core/utils/colors.dart';
-import 'package:food_delivery/presentation/pages/home/main_food_page.dart';
+import 'package:food_delivery/core/utils/colors.dart'; 
 import 'package:food_delivery/presentation/widgets/widgets.dart';
-import 'package:get/get.dart';
-import 'package:get/get_state_manager/src/simple/list_notifier.dart';
+import 'package:get/get.dart'; 
 
 class CartPage extends StatefulWidget {
   

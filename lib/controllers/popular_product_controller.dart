@@ -10,21 +10,17 @@ class PopularProductController extends GetxController {
   PopularProductController({
     required this.popularProductRepo,
   });
-   final List<ProductModel> popularProductList = [];
-    List popularProductIdList =[];
+    List<ProductModel> popularProductList = []; 
    bool isLoaded = false;
    late CartController _cart;
   
   
 
-  Future<void> getPopularProductList()async{ 
-   Response response = await popularProductRepo.getPopularProductList();
-   print(response.body);
+  Future<void> getPopularProductList()async{
+    popularProductList = []; 
+   Response response = await popularProductRepo.getPopularProductList(); 
    if(response.statusCode == 200){ 
-     popularProductList.addAll(Product.fromJson(response.body).products!);
-     print('====================');
-     print(Product.fromJson(response.body).products);
-     popularProductIdList = popularProductList.map((e) => e.id).toList();
+     popularProductList.addAll(Product.fromJson(response.body).products!); 
      isLoaded =true;    
       update();
    }else{ 
@@ -38,11 +34,10 @@ void setQuantity(bool isIncremented){
     else{
  Get.snackbar('note','you can not add more then 20'
      ,backgroundColor:AppColors.mainColor,
-      colorText: Colors.white);
-    }
+      colorText: Colors.white); 
+      }
   }else{
-     if (inCartItems>0) {
-     
+     if (inCartItems>0) { 
     quantity = quantity -1;
      }else{
         Get.snackbar('note','you can not decrease less then zero',
@@ -51,11 +46,7 @@ void setQuantity(bool isIncremented){
      }
   }
   update();
-}
-
-
-
-
+} 
 int quantity =0;
 int get inCartItems => quantity; 
 intProduct(ProductModel product, CartController cart ){ 

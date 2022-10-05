@@ -48,7 +48,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                   String url = AppConstants.BASE_URL + AppConstants.IMAGE_FOLDER_URL +popularProducts.popularProductList[index].img;
                   return  GestureDetector(
                     onTap: (){
-                      Get.toNamed(RouteHelper.getFoodDetails(index));
+                      Get.toNamed(RouteHelper.getFoodDetails(index, 'home'));
                     //  if ( !popularProducts.map.containsKey(index)) { 
                     //    popularProducts.product=0;}
                      },

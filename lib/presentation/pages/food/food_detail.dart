@@ -13,8 +13,9 @@ import 'package:get/get.dart';
 
 class FoodDetail extends StatefulWidget {
  final  int pageId;
+ final  String page;
 
-  const FoodDetail({Key? key, required this.pageId}) : super(key: key);
+  const FoodDetail({Key? key, required this.pageId, required this.page}) : super(key: key);
 
   @override
   State<FoodDetail> createState() => _FoodDetailState();
@@ -46,7 +47,12 @@ class _FoodDetailState extends State<FoodDetail> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       GestureDetector(
-                        onTap: (){ Get.toNamed(RouteHelper.getInitial());
+                        onTap: (){ 
+                         if(widget.page=='cartPage'){
+                                  Get.toNamed(RouteHelper.getCartPage());
+                                 }else if(widget.page =='home'){
+                                  Get.toNamed(RouteHelper.getInitial());
+                                 }
                         },
                         child: Padding(
                           padding: EdgeInsets.all(Dimension.pix10 * 3),
@@ -166,5 +172,6 @@ class _FoodDetailState extends State<FoodDetail> {
       
               
   }
+ 
 }
 

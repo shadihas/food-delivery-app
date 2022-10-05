@@ -1,5 +1,6 @@
 import 'dart:async'; 
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/src/scheduler/ticker.dart';
 import 'package:food_delivery/controllers/cart_controller.dart';
 import 'package:food_delivery/controllers/popular_product_controller.dart';
@@ -15,25 +16,23 @@ class SplashScreen extends StatefulWidget {
   State<SplashScreen> createState() => _SplashScreenState();
 } 
 class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMixin {
-  Future<void> loadResourses()async{ 
-     await Get.find<PopularProductController>().getPopularProductList();
+  Future<void> loadRecourses()async{ 
+     await Get.find<CartController>();
+   await    Get.find<PopularProductController>().getPopularProductList();
     await Get.find<RecommendedProductController>().getRecommendedProductList(); 
-    await  Get.find<CartController>();
-    await Get.find<CartController>().cartId; 
-      Get.find<CartController>().cartRepo;
-    //   Get.find<RecommendedProductController>(); 
-    // await Get.find<PopularProductController>().getPopularProductList();
-    // await Get.find<RecommendedProductController>().getRecommendedProductList(); 
   }
   late AnimationController animationController;
   late CurvedAnimation curvedAnimation; 
   void initState() {  
-        loadResourses();   
+     super.initState(); 
+    loadRecourses();   
+   
+    
+    
    animationController = AnimationController(vsync: this,duration: Duration(seconds: 2))..forward();
    curvedAnimation = CurvedAnimation(parent: animationController, curve: Curves.linear);
-   Timer(Duration(seconds: 4),()=> Get.toNamed(RouteHelper.getInitial())); 
-     
-     super.initState(); 
+   Timer(Duration(seconds: 4),()=> Get.toNamed(RouteHelper.getInitial()));   
+    
   } 
   @override
   Widget build(BuildContext context) { 

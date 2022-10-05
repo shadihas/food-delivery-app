@@ -16,7 +16,8 @@ import 'package:get/get_navigation/src/extension_navigation.dart';
 
 class RecommendedFoodDetail extends StatefulWidget {
   final int pageId; 
-  const RecommendedFoodDetail({ Key? key,  required this.pageId }) : super(key: key);
+  final String page;
+  const RecommendedFoodDetail({ Key? key,  required this.pageId, required this.page}) : super(key: key);
 
   @override
   State<RecommendedFoodDetail> createState() => _RecommendedFoodDetailState();
@@ -41,7 +42,13 @@ class _RecommendedFoodDetailState extends State<RecommendedFoodDetail> {
                           Padding(
                             padding: EdgeInsets.all(Dimension.pix10 * 3),
                             child: GestureDetector( 
-                              onTap: ()=> Get.back(),
+                              onTap: (){
+                                 if(widget.page=='cartPage'){
+                                  Get.toNamed(RouteHelper.getCartPage());
+                                 }else if(widget.page =='home'){
+                                  Get.toNamed(RouteHelper.getInitial());
+                                 }
+                                 },
                               child: AppIcon(
                                   iconSize: Dimension.pix10 * 2,
                                   icon: Icons.clear),
@@ -52,7 +59,9 @@ class _RecommendedFoodDetailState extends State<RecommendedFoodDetail> {
                             builder: (cart) {
                               return GestureDetector(
                                 onTap:(){
+                                  
                                   Get.toNamed(RouteHelper.getCartPage());
+                                  
                                 },
                                 child: Padding(
                                   padding: EdgeInsets.all(Dimension.pix10 * 3),

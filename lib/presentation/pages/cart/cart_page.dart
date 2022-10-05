@@ -6,21 +6,24 @@ import 'package:food_delivery/core/dimension.dart';
 import 'package:food_delivery/core/routes/route_helper.dart';
 import 'package:food_delivery/core/utils/app_constants.dart';
 import 'package:food_delivery/core/utils/colors.dart';
+import 'package:food_delivery/presentation/pages/home/main_food_page.dart';
 import 'package:food_delivery/presentation/widgets/widgets.dart';
 import 'package:get/get.dart';
+import 'package:get/get_state_manager/src/simple/list_notifier.dart';
 
-class CartPage extends StatelessWidget {
+class CartPage extends StatefulWidget {
   
    CartPage( {Key? key,  }) : super(key: key);
 
- 
   @override
-  Widget build(BuildContext context) {
-     
-  
-            return GetBuilder<PopularProductController>(
-              
-              builder: (popularController  ) {
+  State<CartPage> createState() => _CartPageState();
+}
+
+class _CartPageState extends State<CartPage> {
+  @override
+  Widget build(BuildContext context) { 
+            return GetBuilder<PopularProductController>( 
+              builder: (popularController) {
              
                 return
      GetBuilder<CartController>(
@@ -88,17 +91,18 @@ class CartPage extends StatelessWidget {
                                        
                                              GestureDetector(
                                               onTap:() {
-     
-                                               var popularIndex = popularController.popularProductIdList.
-                                    indexOf(cartController.cartId[index]);
+                                               
+                                              
+                                             var popularIndex = popularController.popularProductList.
+                                    indexOf(_cartList[index].product!);
                                      if(popularIndex >=0){
-                                  //             Get.toNamed(RouteHelper.getFoodDetails(popularIndex));
-                                  //              print(popularIndex);
-                                  //   }else { 
-                                  //       var recommendedIndex = Get.find<RecommendedProductController>().recommendedProductIdList.
-                                  //   indexOf(cartController.cartId[index]);
-                                    Get.toNamed(RouteHelper.getRecommendedFoodDetail(popularIndex));
-                                  //         print(index);
+                                               Get.toNamed(RouteHelper.getFoodDetails(popularIndex, 'cartPage'));
+                                                print(popularIndex);
+                                     }else { 
+                                        var recommendedIndex = Get.find<RecommendedProductController>().recommendedProductList.
+                                    indexOf(_cartList[index].product!);
+                                    Get.toNamed(RouteHelper.getRecommendedFoodDetail(recommendedIndex, 'cartPage'));
+                                           print(recommendedIndex);
                                      } 
                                     },
                                            
@@ -145,14 +149,8 @@ class CartPage extends StatelessWidget {
                                               GestureDetector( 
                                                 onTap: (){ 
                                                   popularController.intProduct(_cartList[index].product!, cartController);
-                                                  popularController.setQuantity(true);
-                                                  //  popularController.intProduct( product ,Get.find<CartController>());
-                                                // popularController.setQuantity(true); 
-                                               cartController.addItem(_cartList[index].product!, popularController.inCartItems);
-                                                   
-                                                  
-
-                                                //  count.getTotal(); 
+                                                  popularController.setQuantity(true); 
+                                                  cartController.addItem(_cartList[index].product!, popularController.inCartItems); 
                                                   },
                                                 child: Icon(
                                                   Icons.add,
@@ -168,15 +166,10 @@ class CartPage extends StatelessWidget {
                                                 width: Dimension.pix5,
                                               ),
                                               GestureDetector(
-                                                onTap: (){
-                                                    //  popularController.intProduct( product ,Get.find<CartController>());
+                                                onTap: (){ 
                                                  popularController.intProduct(_cartList[index].product!, cartController);
                                                    popularController.setQuantity(false);
-                                                   cartController.addItem(_cartList[index].product!, popularController.inCartItems);
-                                                  
-
-                                                  //  count.getTotal(); 
-                                                  
+                                                   cartController.addItem(_cartList[index].product!, popularController.inCartItems); 
                                                    },
                                                 child: Icon(Icons.remove,size: Dimension.pix15, color: AppColors.signColor))
                                             ],
@@ -242,18 +235,20 @@ class CartPage extends StatelessWidget {
                         ),
                       ),
                     ],
-                  ),
-                
+                  ), 
                       ) ,
                   );
+                  
        }
      );
               }
             );
+             
+            
           }
-          
-        
-      
-  
-  
+  //         @override
+  // void dispose() {
+   
+  //   super.dispose();
+  // }
 }

@@ -37,10 +37,13 @@ class _ExtendableTextState extends State<ExtendableText> {
     ),),
     SizedBox(height: 10,),
     text.length >=150?
-     InkWell(onTap: () { setState(() {
+     InkWell(onTap: () {
+       setState(() {
       show = !show;
      
-     });},
+     }
+     ); 
+     },
      child:!show? Row(
        children: [
          Text('show less ',style: TextStyle( color: AppColors.mainColor,),),

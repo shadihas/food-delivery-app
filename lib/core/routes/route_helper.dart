@@ -8,25 +8,25 @@ import 'package:food_delivery/presentation/pages/splash/splash_screen.dart';
 import 'package:get/get.dart'; 
 import 'package:flutter/widgets.dart';
 class RouteHelper{
-static String getInitial()=>'/';
-static String getFoodDetails(int pageId) => '/foodDetails?pageId=$pageId'; 
-static String getRecommendedFoodDetail(int pageId) => '/recommendedFoodDetail?pageId=$pageId'; 
+static  String getInitial()=>'/initial';
+static String getFoodDetails(int pageId, String page) => '/foodDetails?pageId=$pageId&page=$page'; 
+static String getRecommendedFoodDetail(int pageId, String page) => '/recommendedFoodDetail?pageId=$pageId&page=$page'; 
 static String getCartPage() => '/cartPage';
 static String getSplashScreen() => '/splashScreen';
-static List<GetPage> routes =[ 
-GetPage(name: getInitial(), page: ()=>HomePage(),), 
+static List<GetPage>   routes =[ 
+GetPage(name: '/initial', page: ()=>HomePage(),), 
+
 GetPage(name:'/recommendedFoodDetail' , page: (){
    String? pageId = Get.parameters['pageId'];
-   return RecommendedFoodDetail(pageId:int.parse(pageId!));}),
+    String? page = Get.parameters['page'];
+   return RecommendedFoodDetail(pageId:int.parse(pageId!),page: page.toString());}),
 GetPage(name:'/foodDetails', page: (){
  String? pageId = Get.parameters['pageId'];
- return FoodDetail(pageId:int.parse(pageId!));}, 
+ String? page = Get.parameters['page'];
+ return FoodDetail(pageId:int.parse(pageId!),page: page.toString(),);}, 
  ),
   GetPage(name: '/cartPage', page: ()=> CartPage()),
- GetPage(name: '/splashScreen', page: ()=> SplashScreen()),
- 
-
-
+ GetPage(name: '/splashScreen', page: ()=> SplashScreen()), 
 ];
 
 }

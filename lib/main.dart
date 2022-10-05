@@ -32,13 +32,15 @@ class MyApp extends StatelessWidget {
           builder: (_) {
             return GetBuilder<RecommendedProductController>(
               builder: (_) {
-                return GetMaterialApp(
-                      title: 'Flutter E-commerce', 
-                       getPages: RouteHelper.routes,
-                      initialRoute:RouteHelper.getSplashScreen(),
-                        // home: SplashScreen()
-                      
-                );
+                
+                    return GetMaterialApp(
+                          title: 'Flutter E-commerce', 
+                           getPages: RouteHelper.routes,
+                          initialRoute:RouteHelper.getSplashScreen(),
+                            //  home: SplashScreen()
+                          
+                    );
+                
               }
             );
           }

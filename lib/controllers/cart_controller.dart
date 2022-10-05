@@ -19,9 +19,9 @@ class CartController extends GetxController{
   
       // _items.removeWhere((key, value)=>value.quantity==0);
     
-  if(!_items.containsKey(product.id)){
+    if(!_items.containsKey(product.id)){
     
-  _items.putIfAbsent(product.id, () { 
+   _items.putIfAbsent(product.id, () { 
     return CartModel(
       id: product.id
     ,img: product.img,
@@ -55,7 +55,7 @@ class CartController extends GetxController{
     print(element.quantity);
    });
  
-  update();
+ 
   }
 
 List<CartModel> get getItems => _items.entries.map((e) => e.value).toList();
@@ -66,9 +66,9 @@ int getQuantity(ProductModel product){
     _items.forEach((key, value) {
       if(key ==product.id){
         quantity = value.quantity!;
-      }
+      } 
     });
-    update();
+    
   }return quantity;
   
 }
@@ -83,7 +83,7 @@ int getQuantity(ProductModel product){
  
   // List<CartModel> get cartItems =>  _items.entries.map((e) => e.value).toList();
 
-   List get cartId => _items.entries.map((e) => e.key).toList();
+ //  List get cartId => _items.entries.map((e) => e.key).toList();
  
 int countTotalPrice(){
 totalPrice =0;

@@ -43,7 +43,7 @@ class CartModel {
   'isExist': this.isExist,
   'quantity':  this.quantity,
     'time':  this.time,
-    
+    'product':this.product?.toJson(),
   };
     }
 

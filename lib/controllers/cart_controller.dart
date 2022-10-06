@@ -97,21 +97,21 @@ getItems.forEach((e) {
  
  
  
-//  List<CartModel> storageItems = []; 
-// List<CartModel> getCartData(){  
-//   setCart = cartRepo.getCartList();
-//   // getTotalInStorage();
-//   _items.removeWhere((key, value) => value.quantity ==0);
+ List<CartModel> storageItems = []; 
+List<CartModel> getCartData(){  
+  setCart = cartRepo.getCartList();
+  // getTotalInStorage();
+  _items.removeWhere((key, value) => value.quantity ==0);
  
-//   return storageItems;
-// }
+  return storageItems;
+}
 
-// set setCart(List<CartModel> store) {
-//  storageItems = store; 
-// for (var i = 0; i < storageItems.length; i++) { 
-//    _items.putIfAbsent(storageItems[i].id!, () => storageItems[i]); 
-// } 
-// }
+set setCart(List<CartModel> store) {
+ storageItems = store; 
+for (var i = 0; i < storageItems.length; i++) { 
+   _items.putIfAbsent(storageItems[i].id!, () => storageItems[i]); 
+} 
+}
 
 // bool existInCart(ProductModel product){
 // if(_items.containsKey(product.id)){

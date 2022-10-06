@@ -12,3 +12,4 @@ class AppConstants{
   
 }
 ///'http://mvs.bslmeiyu.com/api/v1/products/popular'
+/// 127.0.0.1:8000/admin/api/v1/products/popular

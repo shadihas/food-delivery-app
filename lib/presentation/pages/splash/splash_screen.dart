@@ -17,7 +17,7 @@ class SplashScreen extends StatefulWidget {
 } 
 class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMixin {
   Future<void> loadRecourses()async{ 
-     await Get.find<CartController>();
+     //await Get.find<CartController>();
    await    Get.find<PopularProductController>().getPopularProductList();
     await Get.find<RecommendedProductController>().getRecommendedProductList(); 
   }

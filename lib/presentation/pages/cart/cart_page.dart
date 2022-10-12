@@ -1,4 +1,5 @@
-import 'package:flutter/material.dart'; 
+import 'package:flutter/material.dart';
+import 'package:food_delivery/controllers/auth_controller.dart'; 
 import 'package:food_delivery/controllers/cart_controller.dart';
 import 'package:food_delivery/controllers/popular_product_controller.dart';
 import 'package:food_delivery/controllers/recommended_product_controller.dart';
@@ -22,7 +23,6 @@ class _CartPageState extends State<CartPage> {
   Widget build(BuildContext context) { 
             return GetBuilder<PopularProductController>( 
               builder: (popularController) {
-             
                 return
      GetBuilder<CartController>(
        builder: (cartController) {
@@ -79,29 +79,28 @@ class _CartPageState extends State<CartPage> {
                                  removeTop: true,
                                  child: ListView.builder(
                                    itemCount: cartController.getItems.length,
-                                   itemBuilder: (context , index){
-                                    //  var product = Get.find<PopularProductController>().popularProductList[index+1]; 
-                                    //  Get.find<PopularProductcartController>().intProduct(product,Get.find<CartcartController>());
-                                      // var items = Get.find<CartController>().cartRepo; 
+                                   itemBuilder: (context , index){ 
                                      return Container(  
                                        child: Row(
                                     children: [
                                        
                                              GestureDetector(
                                               onTap:() {
-                                               
-                                              
-                                             var popularIndex = popularController.popularProductList.
-                                    indexOf(_cartList[index].product!);
+                                               var popularIndex = -1;
+                                              popularController.popularProductList.forEach((element) {
+                                                if(element.id == _cartList[index].id){
+                                                  popularIndex = popularController.popularProductList.indexOf(element) ;}
+                                              });
+                                               var recommendedIndex;
+                                               Get.find<RecommendedProductController>().recommendedProductList.forEach((e) {
+                                                 if(e.id == _cartList[index].id){
+                                                   recommendedIndex = Get.find<RecommendedProductController>().recommendedProductList.indexOf(e) ;}
+                                               });
                                      if(popularIndex >=0){
                                                Get.toNamed(RouteHelper.getFoodDetails(popularIndex, 'cartPage'));
-                                                print(popularIndex);
-                                     }else { 
-                                        var recommendedIndex = Get.find<RecommendedProductController>().recommendedProductList.
-                                    indexOf(_cartList[index].product!);
+                                     }else   {
                                     Get.toNamed(RouteHelper.getRecommendedFoodDetail(recommendedIndex, 'cartPage'));
-                                           print(recommendedIndex);
-                                     } 
+                                     }
                                     },
                                            
                                               child: Container(
@@ -145,10 +144,11 @@ class _CartPageState extends State<CartPage> {
                                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                             children: [
                                               GestureDetector( 
-                                                onTap: (){ 
-                                                  popularController.intProduct(_cartList[index].product!, cartController);
-                                                  popularController.setQuantity(true); 
-                                                  cartController.addItem(_cartList[index].product!, popularController.inCartItems); 
+                                                onTap: (){
+
+                                                   popularController.intProduct(_cartList[index].product!, cartController);
+                                                   popularController.setQuantity(true);
+                                                   cartController.addItem(_cartList[index].product!, popularController.inCartItems);
                                                   },
                                                 child: Icon(
                                                   Icons.add,
@@ -217,8 +217,11 @@ class _CartPageState extends State<CartPage> {
                               ), 
                       GestureDetector(
                         onTap: () { 
-                          print('tapped'); 
-                          // cartController.addToHistory();
+                          if(Get.find<AuthController>().userLoggedIn()){ 
+                           cartController.addToHistory();
+                           }else{  
+                              Get.toNamed(RouteHelper.getSignInPage());
+                           }
                              },
                         child: Container(
                           child: BigText(
@@ -243,10 +246,5 @@ class _CartPageState extends State<CartPage> {
             );
              
             
-          }
-  //         @override
-  // void dispose() {
-   
-  //   super.dispose();
-  // }
+          } 
 }

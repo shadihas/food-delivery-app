@@ -2,13 +2,16 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery/controllers/cart_controller.dart';
 import 'package:food_delivery/core/utils/colors.dart';
+import 'package:food_delivery/data/repository/cart_repo.dart';
 import 'package:food_delivery/model/food_data_model.dart';
 import 'package:get/get.dart'; 
 import 'package:food_delivery/data/repository/popular_product_repo.dart'; 
 class PopularProductController extends GetxController {
   final PopularProductRepo popularProductRepo;
+
   PopularProductController({
     required this.popularProductRepo,
+
   });
     List<ProductModel> popularProductList = []; 
    bool isLoaded = false;
@@ -17,7 +20,7 @@ class PopularProductController extends GetxController {
   
 
   Future<void> getPopularProductList()async{
-    popularProductList = []; 
+     popularProductList = [];
    Response response = await popularProductRepo.getPopularProductList(); 
    if(response.statusCode == 200){ 
      popularProductList.addAll(Product.fromJson(response.body).products!); 
@@ -87,6 +90,7 @@ void addItem(product){
     // _quantity =0;
   // _cart.items.removeWhere((key, value) => value.quantity ==0); 
   //  _cart.countTotalPrice();
+
 update();
 } 
 int get totalItems{

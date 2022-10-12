@@ -40,7 +40,9 @@ class _FoodPageBodyState extends State<FoodPageBody> {
         return GetBuilder<PopularProductController>(
           builder: (popularProducts) {
             
-            return popularProducts.isLoaded? PageView.builder(
+            return
+            popularProducts.isLoaded
+            ? PageView.builder(
                 // controller: pageController,
                 scrollDirection: Axis.horizontal,
                 itemCount: popularProducts.popularProductList.length,

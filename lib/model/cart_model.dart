@@ -31,7 +31,7 @@ class CartModel {
       quantity: map['quantity']?.toInt(),
       isExist: map['isExist'],
       time: map['time'], 
-      product: ProductModel.fromJson(map)
+      product: ProductModel.fromJson(map['product'])
     );
   } 
     Map<String , dynamic> toJson(){
@@ -47,5 +47,5 @@ class CartModel {
   };
     }
 
-  factory CartModel.fromJson(String source) => CartModel.fromMap(json.decode(source));
+  //factory CartModel.fromJson(String source) => CartModel.fromMap(json.decode(source));
 }

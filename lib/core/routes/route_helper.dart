@@ -1,4 +1,6 @@
 
+import 'package:food_delivery/presentation/pages/auth/sign_in_page.dart';
+import 'package:food_delivery/presentation/pages/auth/sign_up_page.dart';
 import 'package:food_delivery/presentation/pages/cart/cart_page.dart';
 import 'package:food_delivery/presentation/pages/food/food_detail.dart';
 import 'package:food_delivery/presentation/pages/food/recommended_food_detail.dart';
@@ -13,6 +15,9 @@ static String getFoodDetails(int pageId, String page) => '/foodDetails?pageId=$p
 static String getRecommendedFoodDetail(int pageId, String page) => '/recommendedFoodDetail?pageId=$pageId&page=$page'; 
 static String getCartPage() => '/cartPage';
 static String getSplashScreen() => '/splashScreen';
+static String getSignUpPage() => '/signUpPage';
+static String getSignInPage() => '/signInPage';
+
 static List<GetPage>   routes =[ 
 GetPage(name: '/initial', page: ()=>HomePage(),), 
 
@@ -27,6 +32,10 @@ GetPage(name:'/foodDetails', page: (){
  ),
   GetPage(name: '/cartPage', page: ()=> CartPage()),
  GetPage(name: '/splashScreen', page: ()=> SplashScreen()), 
+ GetPage(name: '/signUpPage', page:()=>SignUpPage() ,
+ ),
+ GetPage(name: '/signInPage', page:()=>SignInPage())
+
 ];
 
 }

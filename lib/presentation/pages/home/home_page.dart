@@ -4,6 +4,7 @@ import 'package:food_delivery/controllers/popular_product_controller.dart';
 import 'package:food_delivery/controllers/recommended_product_controller.dart';
 import 'package:food_delivery/core/dimension.dart';
 import 'package:food_delivery/core/utils/colors.dart';
+import 'package:food_delivery/presentation/pages/account/account-page.dart';
 import 'package:food_delivery/presentation/pages/cart/cartHistory.dart';
 import 'package:food_delivery/presentation/pages/cart/cart_page.dart';
 import 'package:food_delivery/presentation/pages/food/recommended_food_detail.dart';
@@ -24,7 +25,8 @@ class _HomePageState extends State<HomePage> {
    MainFoodPage(),
    CartHistory(),
     CartPage(),
-   Container(), 
+    Account()
+  // Container(),
   ];
   @override
   Widget build(BuildContext context) { 

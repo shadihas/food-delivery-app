@@ -15,12 +15,9 @@ class CartController extends GetxController{
    Map get items =>_items ;
    int totalPrice = 0;
   
-  void addItem(ProductModel product, int quantity){ 
-  
-      // _items.removeWhere((key, value)=>value.quantity==0);
+  void addItem(ProductModel product, int quantity){
     
     if(!_items.containsKey(product.id)){
-    
    _items.putIfAbsent(product.id, () { 
     return CartModel(
       id: product.id
@@ -32,9 +29,7 @@ class CartController extends GetxController{
     product: product,
     time:DateTime.now().toString() , );
   }); }else{
-    
   _items.update( product.id, (value) {
-    
  return CartModel( id: product.id 
     ,img: product.img,
     isExist:true ,
@@ -42,24 +37,18 @@ class CartController extends GetxController{
     price: product.price, 
     quantity:quantity,
     product: product,
-
     time:DateTime.now().toString() , );
-
-  });
- 
-  }
-
-  // cartRepo.addToCart(cartItems);
+  }); 
+  } 
+  cartRepo.addToCart(getItems);
    _items.removeWhere((k,v) => v.quantity==0);
-   getItems.forEach((element) {
-    print(element.quantity);
-   });
- 
- 
+   // getItems.forEach((element) {
+   //
+   // });
+ // print(getItems[0].product!.id); 
   }
 
-List<CartModel> get getItems => _items.entries.map((e) => e.value).toList();
-
+List<CartModel> get getItems => _items.entries.map((e) => e.value).toList(); 
 int getQuantity(ProductModel product){
   var quantity = 0;
   if(_items.containsKey(product.id)){
@@ -67,10 +56,8 @@ int getQuantity(ProductModel product){
       if(key ==product.id){
         quantity = value.quantity!;
       } 
-    });
-    
-  }return quantity;
-  
+    }); 
+  }return quantity; 
 }
  
  int get totalItems{
@@ -79,11 +66,7 @@ int getQuantity(ProductModel product){
     totalQuantity += value.quantity!;
   });
   return totalQuantity;
- }
- 
-  // List<CartModel> get cartItems =>  _items.entries.map((e) => e.value).toList();
-
- //  List get cartId => _items.entries.map((e) => e.key).toList();
+ } 
  
 int countTotalPrice(){
 totalPrice =0;
@@ -95,22 +78,21 @@ getItems.forEach((e) {
 }
  
  
- 
- 
- List<CartModel> storageItems = []; 
-List<CartModel> getCartData(){  
-  setCart = cartRepo.getCartList();
-  // getTotalInStorage();
-  _items.removeWhere((key, value) => value.quantity ==0);
- 
+List<CartModel> storageItems = [];
+List<CartModel> getCartData(){
+   setCart = cartRepo.getCartList();
+   _items.removeWhere((key, value) => value.quantity ==0);
+   // print('=======');
+   // print(getItems[0].product!.id);
+   // print('=======');
   return storageItems;
 }
 
 set setCart(List<CartModel> store) {
  storageItems = store; 
-for (var i = 0; i < storageItems.length; i++) { 
-   _items.putIfAbsent(storageItems[i].id!, () => storageItems[i]); 
-} 
+for (var i = 0; i < storageItems.length; i++) {
+   _items.putIfAbsent(storageItems[i].product!.id, () => storageItems[i]);
+}
 }
 
 // bool existInCart(ProductModel product){
@@ -128,13 +110,12 @@ for (var i = 0; i < storageItems.length; i++) {
 // update();
 // } 
 
-// addToHistory(){
-//   cartRepo.addToHistory(); 
-//   _items.clear(); 
- 
-  // getTotalInStorage();
-  //  update();
-// }
+ addToHistory() {
+   cartRepo.addToHistory();
+   _items.clear();
+//  getTotalInStorage();
+   update();
+}
 
 }
 

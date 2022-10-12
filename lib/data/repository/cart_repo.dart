@@ -8,57 +8,58 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class CartRepo{ 
   List<CartModel> historyCart =[];
+  List<String> cart = [];
   final SharedPreferences sharedPreferences; 
   CartRepo({required this.sharedPreferences});
 
 
  void addToCart(List<CartModel> cartList){
-  sharedPreferences.remove(AppConstants.CART_KEY); 
-   List<String> cart = []; 
-    var time = DateTime.now(); 
-   cart.clear();
+   cart=[];
+ // sharedPreferences.remove(AppConstants.CART_KEY);
+
+   // var time = DateTime.now();
+  // cart.clear();
  cartList.forEach((element) { 
-  element.time = time.toString();
+ // element.time = time.toString();
     cart.add(jsonEncode(element));
  });
-sharedPreferences.setStringList(AppConstants.CART_KEY, cart);
-print(sharedPreferences.getStringList(AppConstants.CART_KEY));
-getCartList(); 
+sharedPreferences.setStringList(AppConstants.CART_KEY,cart);
+//print(sharedPreferences.getStringList(AppConstants.CART_KEY));
+getCartList();
 
  }
- List<String> carts = [];
- List<String> historyStringList = [];
+  List<String> carts = [];
+  List<CartModel> cartList = [];
+ // List<String> historyStringList = [];
 List<CartModel> getCartList(){
-  
+  carts = [];
   if(sharedPreferences.containsKey(AppConstants.CART_KEY)){
     carts = sharedPreferences.getStringList(AppConstants.CART_KEY)!;
-  } 
-  List<CartModel> cartList = [];
-
-  // carts.map((e) => CartModel.fromMap(jsonDecode(e))).toList();
-
+  }
+cartList=[];
   carts.forEach((element) {
   cartList.add( CartModel.fromMap(jsonDecode(element)));
-    }); 
+    });
+  print('=======$cartList==========');
   return cartList;
 } 
-void addToHistory(){ 
+void addToHistory(){
   carts.removeWhere((element) => element.contains('"quantity":0'));
    sharedPreferences.setStringList(AppConstants.HISTORY_KEY, carts);
-  print( sharedPreferences.getStringList(AppConstants.HISTORY_KEY)); 
+  print( sharedPreferences.getStringList(AppConstants.HISTORY_KEY));
  if( sharedPreferences.containsKey(AppConstants.CART_KEY)){
-  sharedPreferences.clear();
-  } 
-  
-  void getFromHistory(){
-    if(sharedPreferences.containsKey(AppConstants.HISTORY_KEY)){
-     historyStringList =   sharedPreferences.getStringList(AppConstants.HISTORY_KEY)!;} 
-       
-       historyStringList.forEach((element) {
-         historyCart.add(CartModel.fromJson(jsonDecode(element)));
-       });      
-  } 
-} 
+  sharedPreferences.remove(AppConstants.CART_KEY);
+  }
+
+  // void getFromHistory(){
+  //   if(sharedPreferences.containsKey(AppConstants.HISTORY_KEY)){
+  //    historyStringList =   sharedPreferences.getStringList(AppConstants.HISTORY_KEY)!;}
+  //
+  //      historyStringList.forEach((element) {
+  //        historyCart.add(CartModel.fromJson(jsonDecode(element)));
+  //      });
+  // }
+}
 }
 
 //  --- SharedPreferences with getX ----

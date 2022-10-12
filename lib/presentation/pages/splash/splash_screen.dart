@@ -5,20 +5,23 @@ import 'package:flutter/src/scheduler/ticker.dart';
 import 'package:food_delivery/controllers/cart_controller.dart';
 import 'package:food_delivery/controllers/popular_product_controller.dart';
 import 'package:food_delivery/controllers/recommended_product_controller.dart';
+import 'package:food_delivery/controllers/user_info_controller.dart';
 import 'package:food_delivery/core/dimension.dart';
 import 'package:food_delivery/core/routes/route_helper.dart';
 import 'package:food_delivery/data/repository/cart_repo.dart';
+import 'package:food_delivery/model/cart_model.dart';
 import 'package:get/get.dart'; 
 class SplashScreen extends StatefulWidget {
-  const SplashScreen({ Key? key }) : super(key: key);
-
+  const SplashScreen({ Key? key }) : super(key: key); 
   @override
   State<SplashScreen> createState() => _SplashScreenState();
 } 
 class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMixin {
-  Future<void> loadRecourses()async{ 
-     //await Get.find<CartController>();
-   await    Get.find<PopularProductController>().getPopularProductList();
+  Future<void> loadRecourses()async{
+    Get.find<CartController>(); 
+    Get.find<CartController>().getCartData();
+    await Get.find<UserController>().getUserInfo();
+   await  Get.find<PopularProductController>().getPopularProductList();
     await Get.find<RecommendedProductController>().getRecommendedProductList(); 
   }
   late AnimationController animationController;
